@@ -1,4 +1,4 @@
 [submodule "third-party/WiringPi"]
 	path = third-party/WiringPi
-	url = git@github.com:WiringPi/WiringPi.git
+	url = git@github.com:xavi-b/WiringPi.git
 	branch = master

@@ -38,7 +38,7 @@ ScrollView {
             wrapMode: Text.WordWrap
             leftPadding: 10
             rightPadding: leftPadding
-            text: "<p>WiringPi/WiringPi</p>" + "LGPL 3.0 License"
+            text: "<p>xavi-b/WiringPi</p>" + "<p>WiringPi/WiringPi</p>" + "LGPL 3.0 License"
         }
     }
 }

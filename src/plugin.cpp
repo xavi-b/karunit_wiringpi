@@ -31,6 +31,7 @@ bool KU_WiringPi_Plugin::initialize()
     this->getPluginConnector()->setup();
 
     qmlRegisterSingletonInstance("KarunitPlugins", 1, 0, "KUPWiringPiPluginConnector", this->pluginConnector);
+    qmlRegisterType<PinConnection>("KarunitPlugins", 1, 0, "KUPWiringPiPinConnection");
 
     return true;
 }
