@@ -43,11 +43,25 @@ bool KU_WiringPi_Plugin::stop()
 
 bool KU_WiringPi_Plugin::loadSettings()
 {
+    int size = KU::Settings::instance()->beginReadArray("logins");
+    for (int i = 0; i < size; ++i)
+    {
+        KU::Settings::instance()->setArrayIndex(i);
+        PinConnection* pin = PinConnection::fromVariantMap(KU::Settings::instance()->value("pin").toMap());
+        this->getPluginConnector()->add(pin);
+    }
     return true;
 }
 
-bool KU_WiringPi_Plugin::saveSettings() const
+bool KU_WiringPi_Plugin::saveSettings()
 {
+    auto list = this->getPluginConnector()->getPins();
+    KU::Settings::instance()->beginWriteArray(id() + "/pins");
+    for (int i = 0; i < list.size(); ++i)
+    {
+        KU::Settings::instance()->setArrayIndex(i);
+        KU::Settings::instance()->setValue("pin", list[i].value<PinConnection*>()->toVariantMap());
+    }
     return KU::Settings::instance()->status() == QSettings::NoError;
 }
 

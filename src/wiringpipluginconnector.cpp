@@ -11,6 +11,24 @@ void KU_WiringPi_PluginConnector::setup()
 
 void KU_WiringPi_PluginConnector::add(PinConnection* pin)
 {
+    connect(pin, &PinConnection::valueChanged, this, [=](int value) {
+        if (pin->getType() == PinConnection::PLUGIN_SHOW)
+        {
+            emitShowPluginSignal(pin->getData());
+        }
+        else
+        {
+            if (pin->getType() == PinConnection::PLUGIN_SLOT)
+                emitPluginSignal(pin->getData());
+
+            if (pin->getType() == PinConnection::PLUGIN_SLOT_DATA)
+            {
+                QVariantMap data;
+                data.insert("pinValue", value);
+                emitPluginDataSignal(pin->getData(), data);
+            }
+        }
+    });
     this->pins.push_back(QVariant::fromValue(qobject_cast<QObject*>(pin)));
     emit pinsChanged();
 }
@@ -24,4 +42,9 @@ void KU_WiringPi_PluginConnector::remove(int index)
 QString KU_WiringPi_PluginConnector::connectionSlotString(PinConnection::ConnectionType c) const
 {
     return QVariant::fromValue(c).toString();
+}
+
+QVariantList KU_WiringPi_PluginConnector::getPins()
+{
+    return this->pins;
 }

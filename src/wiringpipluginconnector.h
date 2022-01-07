@@ -19,6 +19,8 @@ public:
     Q_INVOKABLE void    remove(int index);
     Q_INVOKABLE QString connectionSlotString(PinConnection::ConnectionType c) const;
 
+    QVariantList getPins();
+
 signals:
     void pinsChanged();
 

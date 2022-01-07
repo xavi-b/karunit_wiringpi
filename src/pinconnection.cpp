@@ -16,7 +16,7 @@ PinConnection::PinConnection(int pin, ConnectionType type, QString data, QObject
     WiringPi::instance()->listenToPin(pin, INT_EDGE_BOTH);
     connect(WiringPi::instance(), &WiringPi::pinValueChanged, this, [=](int pin) {
         if (pin == this->pin)
-            emit valueChanged();
+            emit valueChanged(WiringPi::instance()->readPin(pin));
     });
 }
 
@@ -37,7 +37,7 @@ void PinConnection::setPin(int pin)
     disconnect(WiringPi::instance(), &WiringPi::pinValueChanged, this, nullptr);
     connect(WiringPi::instance(), &WiringPi::pinValueChanged, this, [=](int pin) {
         if (pin == this->pin)
-            emit valueChanged();
+            emit valueChanged(WiringPi::instance()->readPin(pin));
     });
     emit pinChanged();
 }
@@ -62,4 +62,22 @@ void PinConnection::setData(QString data)
 {
     this->data = data;
     emit dataChanged();
+}
+
+PinConnection* PinConnection::fromVariantMap(QVariantMap const& map)
+{
+    PinConnection* pin = new PinConnection;
+    pin->setPin(map["pin"].toInt());
+    pin->setType(static_cast<ConnectionType>(map["type"].toInt()));
+    pin->setData(map["data"].toString());
+    return pin;
+}
+
+QVariantMap PinConnection::toVariantMap() const
+{
+    QVariantMap map;
+    map["pin"]  = pin;
+    map["type"] = static_cast<int>(type);
+    map["data"] = data;
+    return map;
 }

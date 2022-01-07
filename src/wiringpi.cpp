@@ -23,6 +23,7 @@ WiringPi* WiringPi::instance(QObject* parent)
 void WiringPi::listenToPin(int pin, int mode)
 {
     pinMode(pin, INPUT);
+    pullUpDnControl(pin, PUD_DOWN);
     wiringPiISR(pin, mode, &WiringPi::callbackPinValueChanged);
 }
 

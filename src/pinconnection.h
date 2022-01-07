@@ -2,6 +2,7 @@
 #define PINCONNECTION_H
 
 #include <QObject>
+#include <QVariant>
 
 class PinConnection : public QObject
 {
@@ -16,6 +17,7 @@ public:
     {
         PLUGIN_SLOT,
         PLUGIN_SHOW,
+        PLUGIN_SLOT_DATA,
         SIZE
     };
     Q_ENUM(ConnectionType);
@@ -33,8 +35,11 @@ public:
     QString getData() const;
     void    setData(QString data);
 
+    static PinConnection* fromVariantMap(QVariantMap const& map);
+    QVariantMap           toVariantMap() const;
+
 signals:
-    void valueChanged();
+    void valueChanged(int value);
     void pinChanged();
     void typeChanged();
     void dataChanged();
