@@ -43,7 +43,7 @@ bool KU_WiringPi_Plugin::stop()
 
 bool KU_WiringPi_Plugin::loadSettings()
 {
-    int size = KU::Settings::instance()->beginReadArray("logins");
+    int size = KU::Settings::instance()->beginReadArray(id() + "/pins");
     for (int i = 0; i < size; ++i)
     {
         KU::Settings::instance()->setArrayIndex(i);
