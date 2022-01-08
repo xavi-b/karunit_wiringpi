@@ -25,6 +25,20 @@ int PinConnection::value() const
     return WiringPi::readPin(pin);
 }
 
+void PinConnection::changeValue(int value)
+{
+    if (!this->boucingProtection)
+        emit valueChanged(value);
+    else
+    {
+        if (!boucingProtectionTimer.isActive())
+        {
+            boucingProtectionTimer.start(500);
+            emit valueChanged(value);
+        }
+    }
+}
+
 int PinConnection::getPin() const
 {
     return this->pin;
@@ -37,7 +51,7 @@ void PinConnection::setPin(int pin)
     disconnect(WiringPi::instance(), &WiringPi::pinValueChanged, this, nullptr);
     connect(WiringPi::instance(), &WiringPi::pinValueChanged, this, [=](int pin) {
         if (pin == this->pin)
-            emit valueChanged(WiringPi::instance()->readPin(pin));
+            changeValue(WiringPi::instance()->readPin(pin));
     });
     emit pinChanged();
 }
@@ -62,6 +76,17 @@ void PinConnection::setData(QString data)
 {
     this->data = data;
     emit dataChanged();
+}
+
+bool PinConnection::getBoucingProtection() const
+{
+    return this->boucingProtection;
+}
+
+void PinConnection::setBoucingProtection(bool b)
+{
+    this->boucingProtection = b;
+    emit boucingProtectionChanged();
 }
 
 PinConnection* PinConnection::fromVariantMap(QVariantMap const& map)
