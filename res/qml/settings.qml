@@ -40,12 +40,18 @@ Item {
                 Label {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
-                    text: modelData.type
+                    text: KUPWiringPiPluginConnector.connectionSlotString(
+                              modelData.type)
                 }
                 Label {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     text: modelData.data
+                }
+                Label {
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                    text: "" + modelData.bouncingProtection
                 }
             }
 
