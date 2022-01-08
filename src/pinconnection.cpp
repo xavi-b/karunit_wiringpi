@@ -33,6 +33,7 @@ void PinConnection::changeValue(int value)
     {
         if (!boucingProtectionTimer.isActive())
         {
+            boucingProtectionTimer.setSingleShot(true);
             boucingProtectionTimer.start(500);
             emit valueChanged(value);
         }
