@@ -65,6 +65,7 @@ bool KU_WiringPi_Plugin::saveSettings()
     }
     KU::Settings::instance()->endArray();
     KU::Settings::instance()->sync();
+    this->getPluginConnector()->emitLogSignal("Saved pins: " + QString::number(list.size()));
     return KU::Settings::instance()->status() == QSettings::NoError;
 }
 
