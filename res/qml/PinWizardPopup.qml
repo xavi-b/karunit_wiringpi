@@ -78,7 +78,7 @@ Popup {
 
                 ComboBox {
                     id: pinData
-                    model: pin.type == KUPWiringPiPinConnection.PLUGIN_SHOW ? KUInstance.availablePlugins : KUInstance.availableSlots
+                    model: pin.type == KUPWiringPiPinConnection.PLUGIN_SHOW ? KUInstance.widgetPlugins : KUInstance.availableSlots
                     delegate: ItemDelegate {
                         text: modelData
                     }
