@@ -49,5 +49,6 @@ private:
     ConnectionType type = PLUGIN_SLOT;
     QString        data; // slot or plugin id
 };
+Q_DECLARE_METATYPE(PinConnection::ConnectionType);
 
 #endif // PINCONNECTION_H

@@ -41,7 +41,7 @@ Popup {
                 ComboBox {
                     id: pinCombobox
                     model: 64
-                    delegate: Label {
+                    delegate: ItemDelegate {
                         text: "PIN " + modelData
                     }
                 }
@@ -58,7 +58,7 @@ Popup {
                 ComboBox {
                     id: pinType
                     model: KUPWiringPiPinConnection.SIZE
-                    delegate: Label {
+                    delegate: ItemDelegate {
                         text: KUPWiringPiPluginConnector.connectionSlotString(
                                   modelData)
                     }
@@ -76,7 +76,7 @@ Popup {
                 ComboBox {
                     id: pinData
                     model: pin.type == KUPWiringPiPinConnection.PLUGIN_SHOW ? KUInstance.availablePlugins : KUInstance.availableSlots
-                    delegate: Label {
+                    delegate: ItemDelegate {
                         text: modelData
                     }
                 }
