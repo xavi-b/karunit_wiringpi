@@ -98,20 +98,20 @@ Popup {
             }
             Page {
                 function updateData() {
-                    pin.boucingProtection = pinBoucingProtection.checked
+                    pin.bouncingProtection = pinBouncingProtection.checked
                 }
 
                 header: Label {
                     width: parent.width
                     horizontalAlignment: Qt.AlignHCenter
-                    text: qsTr("Add boucing protection")
+                    text: qsTr("Add bouncing protection")
                 }
 
                 Switch {
                     anchors.centerIn: parent
                     width: 300
-                    id: pinBoucingProtection
-                    checked: pin.boucingProtection
+                    id: pinBouncingProtection
+                    checked: pin.bouncingProtection
                 }
             }
         }
