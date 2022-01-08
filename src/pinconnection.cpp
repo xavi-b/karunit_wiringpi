@@ -27,14 +27,14 @@ int PinConnection::value() const
 
 void PinConnection::changeValue(int value)
 {
-    if (!this->boucingProtection)
+    if (!this->bouncingProtection)
         emit valueChanged(value);
     else
     {
-        if (!boucingProtectionTimer.isActive())
+        if (!bouncingProtectionTimer.isActive())
         {
-            boucingProtectionTimer.setSingleShot(true);
-            boucingProtectionTimer.start(500);
+            bouncingProtectionTimer.setSingleShot(true);
+            bouncingProtectionTimer.start(500);
             emit valueChanged(value);
         }
     }
@@ -79,15 +79,15 @@ void PinConnection::setData(QString data)
     emit dataChanged();
 }
 
-bool PinConnection::getBoucingProtection() const
+bool PinConnection::getBouncingProtection() const
 {
-    return this->boucingProtection;
+    return this->bouncingProtection;
 }
 
-void PinConnection::setBoucingProtection(bool b)
+void PinConnection::setBouncingProtection(bool b)
 {
-    this->boucingProtection = b;
-    emit boucingProtectionChanged();
+    this->bouncingProtection = b;
+    emit bouncingProtectionChanged();
 }
 
 PinConnection* PinConnection::fromVariantMap(QVariantMap const& map)
@@ -96,16 +96,16 @@ PinConnection* PinConnection::fromVariantMap(QVariantMap const& map)
     pin->setPin(map["pin"].toInt());
     pin->setType(static_cast<ConnectionType>(map["type"].toInt()));
     pin->setData(map["data"].toString());
-    pin->setBoucingProtection(map["boucingProtection"].toBool());
+    pin->setBouncingProtection(map["bouncingProtection"].toBool());
     return pin;
 }
 
 QVariantMap PinConnection::toVariantMap() const
 {
     QVariantMap map;
-    map["pin"]               = pin;
-    map["type"]              = static_cast<int>(type);
-    map["data"]              = data;
-    map["boucingProtection"] = boucingProtection;
+    map["pin"]                = pin;
+    map["type"]               = static_cast<int>(type);
+    map["data"]               = data;
+    map["bouncingProtection"] = bouncingProtection;
     return map;
 }

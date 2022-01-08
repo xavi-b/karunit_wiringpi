@@ -12,7 +12,7 @@ class PinConnection : public QObject
     Q_PROPERTY(int pin READ getPin WRITE setPin NOTIFY pinChanged)
     Q_PROPERTY(ConnectionType type READ getType WRITE setType NOTIFY typeChanged)
     Q_PROPERTY(QString data READ getData WRITE setData NOTIFY dataChanged)
-    Q_PROPERTY(bool boucingProtection READ getBoucingProtection WRITE setBoucingProtection NOTIFY boucingProtectionChanged)
+    Q_PROPERTY(bool bouncingProtection READ getBouncingProtection WRITE setBouncingProtection NOTIFY bouncingProtectionChanged)
 
 public:
     enum ConnectionType
@@ -38,8 +38,8 @@ public:
     QString getData() const;
     void    setData(QString data);
 
-    bool getBoucingProtection() const;
-    void setBoucingProtection(bool b);
+    bool getBouncingProtection() const;
+    void setBouncingProtection(bool b);
 
     static PinConnection* fromVariantMap(QVariantMap const& map);
     QVariantMap           toVariantMap() const;
@@ -49,15 +49,15 @@ signals:
     void pinChanged();
     void typeChanged();
     void dataChanged();
-    void boucingProtectionChanged();
+    void bouncingProtectionChanged();
 
 private:
     int            pin  = -1;
     ConnectionType type = PLUGIN_SLOT;
     QString        data; // slot or plugin id
-    bool           boucingProtection = true;
+    bool           bouncingProtection = true;
 
-    QTimer boucingProtectionTimer;
+    QTimer bouncingProtectionTimer;
 };
 Q_DECLARE_METATYPE(PinConnection::ConnectionType);
 
