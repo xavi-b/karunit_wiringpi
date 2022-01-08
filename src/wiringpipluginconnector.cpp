@@ -12,17 +12,23 @@ void KU_WiringPi_PluginConnector::setup()
 void KU_WiringPi_PluginConnector::add(PinConnection* pin)
 {
     connect(pin, &PinConnection::valueChanged, this, [=](int value) {
+        emitLogSignal("Signal from pin: " + QString::number(pin->getPin()));
         if (pin->getType() == PinConnection::PLUGIN_SHOW)
         {
+            emitLogSignal("PLUGIN_SHOW");
             emitShowPluginSignal(pin->getData());
         }
         else
         {
             if (pin->getType() == PinConnection::PLUGIN_SLOT)
+            {
+                emitLogSignal("PLUGIN_SLOT");
                 emitPluginSignal(pin->getData());
+            }
 
             if (pin->getType() == PinConnection::PLUGIN_SLOT_DATA)
             {
+                emitLogSignal("PLUGIN_SLOT_DATA");
                 QVariantMap data;
                 data.insert("pinValue", value);
                 emitPluginDataSignal(pin->getData(), data);
