@@ -35,10 +35,14 @@ Popup {
                 }
 
                 header: Label {
+                    width: parent.width
+                    horizontalAlignment: Qt.AlignHCenter
                     text: qsTr("Select pin")
                 }
 
                 ComboBox {
+                    anchors.centerIn: parent
+                    width: 300
                     id: pinCombobox
                     model: 64
                     displayText: "PIN " + currentText
@@ -53,10 +57,14 @@ Popup {
                 }
 
                 header: Label {
+                    width: parent.width
+                    horizontalAlignment: Qt.AlignHCenter
                     text: qsTr("Select connection type")
                 }
 
                 ComboBox {
+                    anchors.centerIn: parent
+                    width: 300
                     id: pinType
                     model: KUPWiringPiPinConnection.SIZE
                     displayText: KUPWiringPiPluginConnector.connectionSlotString(
@@ -73,15 +81,37 @@ Popup {
                 }
 
                 header: Label {
+                    width: parent.width
+                    horizontalAlignment: Qt.AlignHCenter
                     text: qsTr("Select connection data")
                 }
 
                 ComboBox {
+                    anchors.centerIn: parent
+                    width: 300
                     id: pinData
                     model: pin.type == KUPWiringPiPinConnection.PLUGIN_SHOW ? KUInstance.widgetPlugins : KUInstance.availableSlots
                     delegate: ItemDelegate {
                         text: modelData
                     }
+                }
+            }
+            Page {
+                function updateData() {
+                    pin.boucingProtection = pinBoucingProtection.checked
+                }
+
+                header: Label {
+                    width: parent.width
+                    horizontalAlignment: Qt.AlignHCenter
+                    text: qsTr("Add boucing protection")
+                }
+
+                Switch {
+                    anchors.centerIn: parent
+                    width: 300
+                    id: pinBoucingProtection
+                    checked: pin.boucingProtection
                 }
             }
         }

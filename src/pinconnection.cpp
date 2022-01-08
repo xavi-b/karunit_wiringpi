@@ -96,14 +96,16 @@ PinConnection* PinConnection::fromVariantMap(QVariantMap const& map)
     pin->setPin(map["pin"].toInt());
     pin->setType(static_cast<ConnectionType>(map["type"].toInt()));
     pin->setData(map["data"].toString());
+    pin->setBoucingProtection(map["boucingProtection"].toBool());
     return pin;
 }
 
 QVariantMap PinConnection::toVariantMap() const
 {
     QVariantMap map;
-    map["pin"]  = pin;
-    map["type"] = static_cast<int>(type);
-    map["data"] = data;
+    map["pin"]               = pin;
+    map["type"]              = static_cast<int>(type);
+    map["data"]              = data;
+    map["boucingProtection"] = boucingProtection;
     return map;
 }
