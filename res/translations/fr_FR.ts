@@ -31,6 +31,10 @@
         <source>Next</source>
         <translation>Suivant</translation>
     </message>
+    <message>
+        <source>Add bouncing protection</source>
+        <translation>Ajouter une protection contre les sursauts</translation>
+    </message>
 </context>
 <context>
     <name>settings</name>
