@@ -64,6 +64,7 @@ bool KU_WiringPi_Plugin::saveSettings()
         KU::Settings::instance()->setValue("pin", list[i].value<PinConnection*>()->toVariantMap());
     }
     KU::Settings::instance()->endArray();
+    KU::Settings::instance()->sync();
     return KU::Settings::instance()->status() == QSettings::NoError;
 }
 
