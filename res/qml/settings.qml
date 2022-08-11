@@ -40,8 +40,7 @@ Item {
                 Label {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
-                    text: KUPWiringPiPluginConnector.connectionSlotString(
-                              modelData.type)
+                    text: KUPWiringPiPluginConnector.connectionSlotString(modelData.type)
                 }
                 Label {
                     Layout.fillHeight: true
@@ -88,9 +87,7 @@ Item {
                 }
 
                 background: Rectangle {
-                    color: deleteLabel.SwipeDelegate.pressed ? Qt.darker(
-                                                                   "tomato",
-                                                                   1.1) : "tomato"
+                    color: deleteLabel.SwipeDelegate.pressed ? Qt.darker("tomato", 1.1) : "tomato"
                 }
             }
         }

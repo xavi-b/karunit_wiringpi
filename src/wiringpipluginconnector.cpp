@@ -41,6 +41,7 @@ void KU_WiringPi_PluginConnector::add(PinConnection* pin)
 
 void KU_WiringPi_PluginConnector::remove(int index)
 {
+    this->pins.at(index).value<QObject*>()->deleteLater();
     this->pins.removeAt(index);
     emit pinsChanged();
 }
